@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">libreria</string>
     <string name="url">https://storage.googleapis.com/kagglesdsdata/datasets/624161/1112931/Books.json?X-Goog-Algorithm=GOOG4-RSA-SHA256&amp;X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20230215%2Fauto%2Fstorage%2Fgoog4_request&amp;X-Goog-Date=20230215T154814Z&amp;X-Goog-Expires=259200&amp;X-Goog-SignedHeaders=host&amp;X-Goog-Signature=5eaf41feab8a47caa1a8e8f37cf91088634193c355c9c522bb067ec72ca62440b06352684719319762db2eb1d5c0cec68c2e41e925b20bde42ba31df2434930a497fc1467ecba500553d7350884c39385e3747e3eee0bd41f7b0ffdf8f2c5ceb3ffe238bd5138a62aac83fed2f075367f562ac60a1b5e83a4d4bd104f1b3d8236dfa6fbfb92004f1a621b65986106dd96299db23b53b391819738b96d641d708c0311a295ef4de5f9bf5a812659890cc0ccb36b74b4585baaf7c1f8af3bf2b95d9e7f6844d756919f0e4e0d16bafe105c3da3eab0e22d14bf07e8bac2a89664dc76a10002f21f8d0f8fbc1d6239f5953841b265b757e4aed619418166e490433</string>
+    <string name="channel_name">notificationChanel</string>
+    <string name="channel_description">chanel open for notifications</string>
 </resources>
