@@ -18,6 +18,8 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public Book(){};
+
     public String getBook_title() {
         return book_title;
     }
