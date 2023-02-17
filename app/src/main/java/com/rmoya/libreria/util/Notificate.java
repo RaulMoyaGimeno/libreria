@@ -1,5 +1,6 @@
 package com.rmoya.libreria.util;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -10,7 +11,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.rmoya.libreria.R;
 
-public class Notification {
+public class Notificate {
 
     private static final String CHANNEL_ID = "NOTIFICATION_ID";
     private static final int ID = 1000000;
@@ -26,8 +27,8 @@ public class Notification {
     }
 
     public static void notify(Context context, String textTitle, String textContent){
-        android.app.Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(androidx.constraintlayout.widget.R.drawable.abc_ic_star_black_16dp)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(androidx.constraintlayout.widget.R.drawable.notify_panel_notification_icon_bg)
                 .setContentTitle(textTitle)
                 .setContentText(textContent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
