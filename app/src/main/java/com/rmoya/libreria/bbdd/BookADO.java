@@ -14,7 +14,7 @@ public class BookADO {
     private static Context context;
 
     public static void insertBooks(List <Book>lista){
-        try (SQLiteDatabase db = DBInit.abrirBD(context, DBInit.DBNAME)) {
+        try (SQLiteDatabase db = DBInit.abrirBD(context)) {
 
             for (Book book : lista) {
                 ContentValues cv = new ContentValues();

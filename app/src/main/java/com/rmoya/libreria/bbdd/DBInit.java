@@ -12,8 +12,8 @@ public class DBInit {
 
     public static final String DBNAME = "libreria.db";
 
-    public static void inicializarSqlite(Context context, String name, int idRes){
-        File dbFile = context.getDatabasePath(name);
+    public static void inicializarSqlite(Context context,  int idRes){
+        File dbFile = context.getDatabasePath(DBNAME);
 
         if (!dbFile.exists()){
             try (InputStream is = context.getResources().openRawResource(idRes);
@@ -30,9 +30,9 @@ public class DBInit {
         }
     }
 
-    public static SQLiteDatabase abrirBD(Context context, String name){
+    public static SQLiteDatabase abrirBD(Context context){
         SQLiteDatabase db = SQLiteDatabase.openDatabase(
-                context.getDatabasePath(name).getAbsolutePath(),
+                context.getApplicationContext().getDatabasePath(DBNAME).getAbsolutePath(),
                 null,
                 SQLiteDatabase.OPEN_READWRITE);
         return db;
