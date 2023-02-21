@@ -31,7 +31,7 @@ EditText txtPass2Registro;
         Button btnRegistrar = findViewById(R.id.btnRegistrar);
 
         btnRegistrar.setOnClickListener(v->{
-           if(UserADO.insertUser(new User(txtNombreRegistro.getText().toString(),txtUserRegistro.getText().toString(), Encryptation.encrypt(txtPass1Registro.getText().toString())))){
+           if(UserADO.insertUser(this, new User(txtNombreRegistro.getText().toString(),txtUserRegistro.getText().toString(), Encryptation.encrypt(txtPass1Registro.getText().toString())))){
                Alerts.launchDialogFields(this, "Registro ok","Cerrar");
            } else{
                Alerts.launchDialogFields(this, "Registro mal","Cerrar");
