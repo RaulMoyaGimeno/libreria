@@ -3,13 +3,18 @@ package com.rmoya.libreria.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.rmoya.libreria.R;
+import com.rmoya.libreria.bbdd.UserADO;
 import com.rmoya.libreria.util.Alerts;
+import com.rmoya.libreria.util.Encryptation;
 import com.rmoya.libreria.util.TextViewsUtilities;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,7 +33,13 @@ EditText txtPassLogin;
         });
         Button btnAcceder = findViewById(R.id.btnAcceder);
         btnAcceder.setOnClickListener(v->{
-            compruebaCampos();
+            if(!UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
+                Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
+                startActivity(intent);
+                finish();
+            } else{
+                Alerts.launchDialogFields(this,"Usuario o contraseña mal","OK");
+            }
         });
     }
     public void compruebaCampos(){
@@ -37,9 +48,14 @@ EditText txtPassLogin;
         } else if(TextViewsUtilities.checkTxtEmpty(txtPassLogin)){
             Alerts.launchDialogFields(this,"Pass mal","OK");
         } else{
-            Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-            startActivity(intent);
-            finish();
+            CheckBox ch = findViewById(R.id.checkRecordar);
+            if(ch.isChecked()){
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("name",txtUserLogin.getText().toString());
+                editor.apply();
+            }
+
         }
     }
 }
