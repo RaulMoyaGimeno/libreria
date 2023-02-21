@@ -11,9 +11,9 @@ import java.util.List;
 
 
 public class BookADO {
-    private static Context context;
 
-    public static void insertBooks(List <Book>lista){
+
+    public static void insertBooks(Context context, List <Book>lista){
         try (SQLiteDatabase db = DBInit.abrirBD(context)) {
 
             for (Book book : lista) {
