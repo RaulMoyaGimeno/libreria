@@ -9,7 +9,7 @@ import android.util.Log;
 import com.rmoya.libreria.model.User;
 
 public class UserADO {
-    
+
 
     public static boolean insertUser(Context context,User user) {
         try (SQLiteDatabase db = DBInit.abrirBD(context)) {
@@ -27,7 +27,7 @@ public class UserADO {
     }
 
     public static boolean validateUser(Context context,String usuario,String pass){
-        String sql = "SELECT * FROM alumnos WHERE user = ? AND password =?";
+        String sql = "SELECT * FROM User WHERE user = ? AND password =?";
         String[] args = { usuario, pass };
 
         try (SQLiteDatabase db = DBInit.abrirBD(context)){
@@ -35,14 +35,14 @@ public class UserADO {
             int count = cursor.getCount();
 
             if (count ==0){
-                return true;
+                return false;
             }
             else
-                return false;
+                return true;
         }
     }
     public static boolean existUser(Context context,String usuario){
-        String sql = "SELECT * FROM alumnos WHERE user = ?";
+        String sql = "SELECT * FROM User WHERE user = ?";
         String[] args = { usuario};
 
         try (SQLiteDatabase db = DBInit.abrirBD(context)){
@@ -50,10 +50,10 @@ public class UserADO {
             int count = cursor.getCount();
 
             if (count ==0){
-                return true;
+                return false;
             }
             else
-                return false;
+                return true;
         }
     }
 }
