@@ -34,6 +34,13 @@ EditText txtPassLogin;
         Button btnAcceder = findViewById(R.id.btnAcceder);
         btnAcceder.setOnClickListener(v->{
             if(!UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
+                CheckBox ch = findViewById(R.id.checkRecordar);
+                if(ch.isChecked()){
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name",txtUserLogin.getText().toString());
+                    editor.apply();
+                }
                 Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
                 startActivity(intent);
                 finish();
@@ -48,13 +55,7 @@ EditText txtPassLogin;
         } else if(TextViewsUtilities.checkTxtEmpty(txtPassLogin)){
             Alerts.launchDialogFields(this,"Pass mal","OK");
         } else{
-            CheckBox ch = findViewById(R.id.checkRecordar);
-            if(ch.isChecked()){
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name",txtUserLogin.getText().toString());
-                editor.apply();
-            }
+
 
         }
     }
