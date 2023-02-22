@@ -1,6 +1,8 @@
 package com.rmoya.libreria.model;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     private String book_title;
     private String author;
