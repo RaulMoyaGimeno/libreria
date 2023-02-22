@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import com.rmoya.libreria.R;
 
+import java.io.Serializable;
+
 public class MainScreenActivity extends AppCompatActivity {
 
     @Override
@@ -24,20 +26,19 @@ public class MainScreenActivity extends AppCompatActivity {
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
         btnAbrirJson.setOnClickListener(v -> {
-            launchActivity(JsonActivity.class);
+            launchActivity(JsonActivity.class, getString(R.string.json));
         });
 
         btnAbrirBbdd.setOnClickListener(v -> {
             launchActivity(BBDDActivity.class);
         });
 
-
         btnAbrirFavs.setOnClickListener(v -> {
-            launchActivity(FavsActivity.class);
+            launchActivity(JsonActivity.class, getString(R.string.favs));
         });
-        
+
         btnAbrirLikes.setOnClickListener(v -> {
-            launchActivity(LikesActivity.class);
+            launchActivity(JsonActivity.class, getString(R.string.likes));
         });
 
         btnCerrarSesion.setOnClickListener(v -> {
@@ -47,6 +48,12 @@ public class MainScreenActivity extends AppCompatActivity {
             finish();
         });
 
+    }
+
+    public void launchActivity(Class clase, String mostrar) {
+        Intent intent = new Intent(getApplicationContext(), clase);
+        intent.putExtra(getString(R.string.mostrar), mostrar);
+        startActivity(intent);
     }
 
     public void launchActivity(Class clase) {
