@@ -33,7 +33,7 @@ EditText txtPassLogin;
         });
         Button btnAcceder = findViewById(R.id.btnAcceder);
         btnAcceder.setOnClickListener(v->{
-            if(!UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
+            if(UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
                 CheckBox ch = findViewById(R.id.checkRecordar);
                 if(ch.isChecked()){
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
