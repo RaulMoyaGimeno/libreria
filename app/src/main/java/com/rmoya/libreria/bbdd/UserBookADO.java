@@ -109,4 +109,20 @@ public class UserBookADO {
         }
         return books;
     }
+
+    public static boolean existUserBook(Context context,int clave){
+        String sql = "SELECT * FROM UserBook WHERE id = ?";
+        String[] args = {String.valueOf(clave)};
+
+        try (SQLiteDatabase db = DBInit.abrirBD(context)){
+            Cursor cursor = db.rawQuery(sql, args);
+            int count = cursor.getCount();
+
+            if (count ==0){
+                return false;
+            }
+            else
+                return true;
+        }
+    }
 }

@@ -53,4 +53,20 @@ public class BookADO {
             return book;
         }
     }
+
+    public static boolean existBook(Context context,String titulo){
+        String sql = "SELECT * FROM Book WHERE book_title = ?";
+        String[] args = {titulo};
+
+        try (SQLiteDatabase db = DBInit.abrirBD(context)){
+            Cursor cursor = db.rawQuery(sql, args);
+            int count = cursor.getCount();
+
+            if (count ==0){
+                return false;
+            }
+            else
+                return true;
+        }
+    }
 }
