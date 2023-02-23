@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class UserBook implements Serializable {
 
-    private final int id;
-    private final String user;
-    private final String title;
+    private int id;
+    private String user;
+    private String title;
     private int fav;
     private int read;
     private int reading;
     private int discard;
     private int liked;
+
+    public UserBook(){}
 
     public UserBook(int id, String user, String title, int fav, int read, int reading, int discard, int liked) {
         this.id = id;
@@ -22,6 +24,18 @@ public class UserBook implements Serializable {
         this.reading = reading;
         this.discard = discard;
         this.liked = liked;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
