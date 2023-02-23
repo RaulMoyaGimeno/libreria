@@ -13,4 +13,16 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.amrillo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorSecondary">#FFD53B</item>
+    </style>
+    <style name="Theme.rojo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorSecondary">#FF1100</item>
+    </style>
+    <style name="Theme.verde" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorSecondary">#00FF00</item>
+    </style>
+    <style name="Theme.azul" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorSecondary">#2196F3</item>
+    </style>
 </resources>
