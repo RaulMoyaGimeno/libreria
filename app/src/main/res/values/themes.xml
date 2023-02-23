@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.amrillo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorSecondary">#FFD53B</item>
+        <item name="colorSecondary">#FFEB3B</item>
     </style>
     <style name="Theme.rojo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorSecondary">#FF1100</item>
