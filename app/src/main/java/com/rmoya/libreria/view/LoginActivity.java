@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
@@ -27,6 +28,7 @@ EditText txtPassLogin;
         txtUserLogin = findViewById(R.id.txtUserLogin);
         txtPassLogin = findViewById(R.id.txtPassLogin);
         TextView txtCrearUsuario = findViewById(R.id.txtCrearUsuario);
+        txtCrearUsuario.setPaintFlags(txtCrearUsuario.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         txtCrearUsuario.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(), NewUserActivity.class);
             startActivity(intent);

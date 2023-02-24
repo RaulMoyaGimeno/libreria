@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:backgroundTint="#85FFFFFF"
+    android:backgroundTintMode="screen"
     tools:context=".view.MainScreenActivity">
 
     <Button
@@ -39,8 +42,8 @@
 
     <Button
         android:id="@+id/btnAbrirFavs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="225dp"
+        android:layout_height="42dp"
         android:layout_marginTop="30dp"
         android:text="favoritos de la gente"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
+        android:backgroundTint="#FE846A"
         android:text="Cerrar sesión"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

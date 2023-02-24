@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    android:backgroundTint="#85FFFFFF"
+    android:backgroundTintMode="screen"
     tools:context=".view.LoginActivity">
 
     <TextView
@@ -12,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Iniciar sesión"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +29,8 @@
         android:ems="10"
         android:hint="Nombre de usuario"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +44,8 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +64,13 @@
 
     <TextView
         android:id="@+id/txtCrearUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="¿Aún no dispone de cuenta? \nPulse aquí"
+        android:layout_width="189dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="48dp"
+        android:text="Crear un nuevo usuario aquí"
         android:textAlignment="center"
+        android:textColor="#0645AD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkRecordar" />
 
@@ -72,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Recuérdame"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.365"
         app:layout_constraintStart_toStartOf="parent"

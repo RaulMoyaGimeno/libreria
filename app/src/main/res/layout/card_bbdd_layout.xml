@@ -15,7 +15,8 @@
             android:id="@+id/txtTituloBbdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="16sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/estrella"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.amrillo" />
 
             <CheckBox
@@ -42,6 +44,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/check"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.verde" />
 
             <CheckBox
@@ -51,6 +54,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/libro"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.azul" />
 
             <CheckBox
@@ -60,6 +64,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/cruz"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.rojo" />
 
             <CheckBox
@@ -69,6 +74,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/like"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.verde" />
 
             <CheckBox
@@ -78,6 +84,7 @@
                 android:layout_weight="1"
                 android:button="@drawable/notlike"
                 android:checked="true"
+                android:clickable="false"
                 android:theme="@style/Theme.rojo" />
         </LinearLayout>
     </LinearLayout>
