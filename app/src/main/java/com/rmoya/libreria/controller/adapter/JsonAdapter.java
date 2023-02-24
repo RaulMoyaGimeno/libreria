@@ -59,9 +59,12 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
 
         holder.itemView.setOnClickListener(v->{
+
             Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
+            intent.putExtra("userbook",new UserBook(book.getBook_title()));
             intent.putExtra("libro",book);
             v.getContext().startActivity(intent);
+
         });
 
 

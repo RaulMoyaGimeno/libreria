@@ -68,7 +68,6 @@ public class ShowBookActivity extends AppCompatActivity {
         if(UserBookADO.existUserBook(this,userBook.getUser(),userBook.getTitle())){
             //Si el userbook existe
             stateUserBook(userBook);
-            updateCheck(userBook);
             UserBookADO.updateUserBook(this,userBook);
         }else{
             //Crear un nuevo user book
@@ -80,6 +79,7 @@ public class ShowBookActivity extends AppCompatActivity {
         btnGuardarCambios.setOnClickListener(v -> {
             if(UserBookADO.existUserBook(this,userBook.getUser(),userBook.getTitle())){
                 //Si el userbook existe
+                updateCheck(userBook);
                 UserBookADO.updateUserBook(this,userBook);
             }else{
                 //Crear un nuevo user book

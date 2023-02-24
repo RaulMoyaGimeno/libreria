@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.BookADO;
 import com.rmoya.libreria.model.Book;
+import com.rmoya.libreria.model.User;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.view.BBDDActivity;
@@ -57,8 +58,12 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
 
 
         holder.itemView.setOnClickListener(v->{
+
             Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
-            intent.putExtra("libro",book);
+            intent.putExtra("userbook",book);
+            Book books = BookADO.getByTitle(v.getContext(), book.getTitle());
+            Log.i("Book: ", book.toString());
+            intent.putExtra("libro", book);
             v.getContext().startActivity(intent);
         });
 
@@ -92,7 +97,8 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             checkGuardar = itemView.findViewById(R.id.checkGuardar);
-
+            txtlike = itemView.findViewById(R.id.txtLikes);
+            txtfavs = itemView.findViewById(R.id.txtFavs);
 
             checkGuardar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
