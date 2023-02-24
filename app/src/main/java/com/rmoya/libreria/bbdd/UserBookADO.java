@@ -125,4 +125,20 @@ public class UserBookADO {
                 return true;
         }
     }
+    public static void insertUserBook(Context context, UserBook ub){
+        try (SQLiteDatabase db = DBInit.abrirBD(context)) {
+
+
+                ContentValues cv = new ContentValues();
+                cv.put("user", ub.getUser());
+                cv.put("title", ub.getTitle());
+                cv.put("fav", ub.getFav());
+                cv.put("read", ub.getRead());
+                cv.put("reading", ub.getReading());
+                cv.put("discard", ub.getDiscard());
+                cv.put("liked", ub.getLiked());
+                db.insert("UserBook", null, cv);
+
+        }
+    }
 }
