@@ -24,7 +24,7 @@ public class BookADO {
                 cv.put("author", book.getAuthor());
                 cv.put("edition", book.getEdition());
                 cv.put("openurl", book.getOpenurl());
-                cv.put("pdfurl", book.getPdf_url());
+                cv.put("pdf_url", book.getPdf_url());
                 cv.put("isbn", book.getIsbn());
                 long id = db.insert("Book", null, cv);
             }
