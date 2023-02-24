@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.DBInit;
 import com.rmoya.libreria.controller.JsonDownloader;
+import com.rmoya.libreria.controller.UserController;
 
 import java.util.prefs.Preferences;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(sp.contains("name")){
             clase = MainScreenActivity.class;
+            UserController.userStatic = sp.getString("name","undefined");
         }
 
         Handler handler = new Handler(Looper.myLooper());
