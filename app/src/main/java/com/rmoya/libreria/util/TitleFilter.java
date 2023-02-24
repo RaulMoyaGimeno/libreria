@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public class TitleFilter implements TextWatcher {
 
     RecyclerView recyclerView;
-    Class<? extends RecyclerView.Adapter> adapter;
+    Class<?> adapter;
     List<UserBook> list;
     Context context;
 
-    public TitleFilter(Context context, RecyclerView recyclerView, Class<? extends RecyclerView.Adapter> adapter, List<UserBook> list){
+    public TitleFilter(Context context, RecyclerView recyclerView, Class<?> adapter, List<UserBook> list){
         this.recyclerView = recyclerView;
         this.adapter = adapter;
         this.list = list;
