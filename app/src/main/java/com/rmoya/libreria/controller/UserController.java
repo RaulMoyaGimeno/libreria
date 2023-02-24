@@ -1,5 +1,5 @@
 package com.rmoya.libreria.controller;
 
-public class UserAdapter {
+public class UserController {
     public static String userStatic;
 }

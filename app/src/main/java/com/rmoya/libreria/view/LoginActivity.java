@@ -14,10 +14,9 @@ import android.widget.TextView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.UserADO;
-import com.rmoya.libreria.controller.UserAdapter;
+import com.rmoya.libreria.controller.UserController;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.util.Encryptation;
-import com.rmoya.libreria.util.TextViewsUtilities;
 
 public class LoginActivity extends AppCompatActivity {
 EditText txtUserLogin;
@@ -30,10 +29,12 @@ EditText txtPassLogin;
         txtPassLogin = findViewById(R.id.txtPassLogin);
         TextView txtCrearUsuario = findViewById(R.id.txtCrearUsuario);
         txtCrearUsuario.setPaintFlags(txtCrearUsuario.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         txtCrearUsuario.setOnClickListener(v->{
             Intent intent = new Intent(getApplicationContext(), NewUserActivity.class);
             startActivity(intent);
         });
+
         Button btnAcceder = findViewById(R.id.btnAcceder);
         btnAcceder.setOnClickListener(v->{
             if(UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
@@ -44,7 +45,7 @@ EditText txtPassLogin;
                     editor.putString("name",txtUserLogin.getText().toString());
                     editor.apply();
                 }
-                UserAdapter.userStatic = txtUserLogin.getText().toString();
+                UserController.userStatic = txtUserLogin.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
                 startActivity(intent);
                 finish();
