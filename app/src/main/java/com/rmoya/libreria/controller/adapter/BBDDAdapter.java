@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.BookADO;
-import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.model.UserBook;
-import com.rmoya.libreria.view.BBDDActivity;
+import com.rmoya.libreria.view.ShowBookActivity;
 
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class BBDDAdapter extends RecyclerView.Adapter<BBDDAdapter.ViewHolder>{
 
         holder.itemView.setOnClickListener(v->{
 
-            Intent intent = new Intent(v.getContext(), BBDDActivity.class);
+            Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
             intent.putExtra("userBook",userBook);
             intent.putExtra("book", BookADO.getByTitle(v.getContext(), userBook.getTitle()));
             v.getContext().startActivity(intent);
