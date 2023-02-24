@@ -19,6 +19,10 @@ public class UserBook implements Serializable {
         this.title = title;
         user = UserController.userStatic;
         reading = 1;
+        fav = 0;
+        read = 0;
+        discard = 0;
+        liked = 0;
     }
 
     public UserBook(){}

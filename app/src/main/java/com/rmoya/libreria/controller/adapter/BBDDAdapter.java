@@ -1,6 +1,7 @@
 package com.rmoya.libreria.controller.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.BookADO;
+import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.view.ShowBookActivity;
 
@@ -29,7 +31,7 @@ public class BBDDAdapter extends RecyclerView.Adapter<BBDDAdapter.ViewHolder>{
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_bbdd_layout, parent, false);
 
-        return new BBDDAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -49,8 +51,10 @@ public class BBDDAdapter extends RecyclerView.Adapter<BBDDAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(v->{
 
             Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
-            intent.putExtra("userBook",userBook);
-            intent.putExtra("book", BookADO.getByTitle(v.getContext(), userBook.getTitle()));
+            intent.putExtra("userbook",userBook);
+            Book book = BookADO.getByTitle(v.getContext(), userBook.getTitle());
+            Log.i("Book: ", book.toString());
+            intent.putExtra("libro", book);
             v.getContext().startActivity(intent);
         });
 
@@ -60,7 +64,7 @@ public class BBDDAdapter extends RecyclerView.Adapter<BBDDAdapter.ViewHolder>{
     @Override
     public int getItemCount() {return list.size();}
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTitulo;
         CheckBox cbFavs;

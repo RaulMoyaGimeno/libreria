@@ -40,7 +40,7 @@ public class TitleFilter implements TextWatcher {
             recyclerView.setAdapter(new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s)), context));
         }
         if(adapter == BetterAdapter.class){
-            recyclerView.setAdapter(new BetterAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList())));
+            recyclerView.setAdapter(new BetterAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList()), context));
         }
         if(adapter == BBDDAdapter.class){
             recyclerView.setAdapter(new BBDDAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList())));
