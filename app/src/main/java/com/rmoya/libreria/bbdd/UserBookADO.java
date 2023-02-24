@@ -85,7 +85,7 @@ public class UserBookADO {
             cv.put("discard", ub.getDiscard());
             cv.put("liked", ub.getLiked());
 
-            db.update("UserBook",cv,"user=?",new String[]{String.valueOf(ub.getUser())});
+            db.update("UserBook",cv,"user=? AND title=?",new String[]{ub.getUser(),ub.getTitle()});
         }catch (Exception e){
             Log.i("Error",e.toString());
         }
