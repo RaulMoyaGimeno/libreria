@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.UserBookADO;
-import com.rmoya.libreria.controller.UserAdapter;
+import com.rmoya.libreria.controller.UserController;
 import com.rmoya.libreria.controller.adapter.BBDDAdapter;
 import com.rmoya.libreria.model.UserBook;
+import com.rmoya.libreria.util.TitleFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,11 @@ public class BBDDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bbddactivity);
 
-        List<UserBook> books = UserBookADO.getByUser(this, UserAdapter.userStatic);
+        //List<UserBook> books = UserBookADO.getByUser(this, UserController.userStatic);
+
+        List<UserBook> books = new ArrayList<>();
+        books.add(new UserBook("Pepito"));
+        books.add(new UserBook("Papito"));
 
         RecyclerView recycler = findViewById(R.id.recyclerBbdd);
         recycler.setHasFixedSize(true);
@@ -38,22 +43,6 @@ public class BBDDActivity extends AppCompatActivity {
 
         TextView txtBuscar = findViewById(R.id.editTextTextPersonName);
 
-        txtBuscar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No se requiere ninguna acción antes de cambiar el texto
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                recycler.setAdapter(new BBDDAdapter(books.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList())));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-        });
+        txtBuscar.addTextChangedListener(new TitleFilter(recycler, BBDDAdapter.class, books));
     }
 }

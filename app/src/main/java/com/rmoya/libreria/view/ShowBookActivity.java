@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -12,7 +13,8 @@ import android.widget.TextView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.UserBookADO;
-import com.rmoya.libreria.controller.UserAdapter;
+
+import com.rmoya.libreria.controller.UserController;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
 
@@ -59,7 +61,7 @@ public class ShowBookActivity extends AppCompatActivity {
         Intent intent= getIntent();
         book= (Book) intent.getSerializableExtra("libro");
         userBook=(UserBook) intent.getSerializableExtra("userbook");
-        user= UserAdapter.userStatic;
+        user= UserController.userStatic;
         showData();
         cargarWeb(book.getOpenurl());
 
@@ -70,13 +72,22 @@ public class ShowBookActivity extends AppCompatActivity {
             UserBookADO.updateUserBook(this,userBook);
         }else{
             //Crear un nuevo user book
-            UserBook nuevo= new UserBook();
-            nuevo.setTitle(book.getBook_title());
-            nuevo.setUser(user);
-            updateCheck(nuevo);
+            userBook= new UserBook();
+            userBook.setTitle(book.getBook_title());
+            userBook.setUser(user);
+            updateCheck(userBook);
         }
-
+        btnGuardarCambios.setOnClickListener(v -> {
+            if(UserBookADO.existUserBook(this,userBook.getUser(),userBook.getTitle())){
+                //Si el userbook existe
+                UserBookADO.updateUserBook(this,userBook);
+            }else{
+                //Crear un nuevo user book
+                UserBookADO.insertUserBook(this,userBook);
+            }
+        });
     }
+
 
     private void cargarWeb(String atributo){
         if(!txtOpenUrlShow.getText().equals("")){
