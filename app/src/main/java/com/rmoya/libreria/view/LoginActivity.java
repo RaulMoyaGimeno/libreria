@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.UserADO;
+import com.rmoya.libreria.controller.UserAdapter;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.util.Encryptation;
 import com.rmoya.libreria.util.TextViewsUtilities;
@@ -43,6 +44,7 @@ EditText txtPassLogin;
                     editor.putString("name",txtUserLogin.getText().toString());
                     editor.apply();
                 }
+                UserAdapter.userStatic = txtUserLogin.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
                 startActivity(intent);
                 finish();
@@ -50,15 +52,5 @@ EditText txtPassLogin;
                 Alerts.launchDialogFields(this,"Usuario o contraseña mal","OK");
             }
         });
-    }
-    public void compruebaCampos(){
-        if(TextViewsUtilities.checkTxtEmpty(txtUserLogin)){
-            Alerts.launchDialogFields(this,"Usuario mal","OK");
-        } else if(TextViewsUtilities.checkTxtEmpty(txtPassLogin)){
-            Alerts.launchDialogFields(this,"Pass mal","OK");
-        } else{
-
-
-        }
     }
 }
