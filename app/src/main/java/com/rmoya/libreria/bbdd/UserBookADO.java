@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
@@ -22,11 +23,33 @@ public class UserBookADO {
 
             while(cursor.moveToNext()){
                 UserBook userbook = new UserBook(
+                        0, "", cursor.getString(0), cursor.getInt(1), 0,
+                        0,0, 0);
+
+                books.add(userbook);
+            }
+        }catch (Exception e){
+            Log.i("Error",e.toString());
+        }
+        return books;
+    }
+
+    public static List<UserBook> orderByLike(Context context){
+        List<UserBook> books = new ArrayList<>();
+        String sql ="SELECT title, fav FROM UserBook GROUP by title order by liked DESC";
+
+        try(SQLiteDatabase db =DBInit.abrirBD(context)){
+            Cursor cursor =db.rawQuery(sql,null);
+
+            while(cursor.moveToNext()){
+                UserBook userbook = new UserBook(
                         0, "", cursor.getString(0), 0, 0,
                         0,0, cursor.getInt(1));
 
                 books.add(userbook);
             }
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
         return books;
     }
@@ -45,6 +68,8 @@ public class UserBookADO {
                 cv.put("liked", ub.getLiked());
                 long id = db.insert("UserBook", null, cv);
             }
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
     }
 
@@ -61,6 +86,8 @@ public class UserBookADO {
             cv.put("liked", ub.getLiked());
 
             db.update("UserBook",cv,"user=?",new String[]{String.valueOf(ub.getUser())});
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
     }
     public static UserBook getByTitleAndUser(Context context, String usuario,String titulo){
@@ -84,7 +111,10 @@ public class UserBookADO {
                 return ub;
             }else
                 return null;
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return null;
     }
     public static List<UserBook> getByUser(Context context,String usuario){
         List<UserBook> books = new ArrayList<>();
@@ -106,6 +136,8 @@ public class UserBookADO {
                 ub.setLiked(cursor.getInt(7));
                 books.add(ub);
             }
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
         return books;
     }
@@ -123,7 +155,10 @@ public class UserBookADO {
             }
             else
                 return true;
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return false;
     }
     public static void insertUserBook(Context context, UserBook ub){
         try (SQLiteDatabase db = DBInit.abrirBD(context)) {
@@ -139,6 +174,8 @@ public class UserBookADO {
                 cv.put("liked", ub.getLiked());
                 db.insert("UserBook", null, cv);
 
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
     }
 }

@@ -39,7 +39,10 @@ public class UserADO {
             }
             else
                 return true;
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return false;
     }
     public static boolean existUser(Context context,String usuario){
         String sql = "SELECT * FROM User WHERE user = ?";
@@ -54,6 +57,9 @@ public class UserADO {
             }
             else
                 return true;
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return false;
     }
 }

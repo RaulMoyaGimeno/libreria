@@ -28,6 +28,8 @@ public class BookADO {
                 cv.put("isbn", book.getIsbn());
                 long id = db.insert("Book", null, cv);
             }
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
     }
 
@@ -50,8 +52,11 @@ public class BookADO {
                 book.setIsbn(cursor.getString(5));
 
             }
-            return book;
+
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return book;
     }
 
     public static boolean existBook(Context context,String titulo){
@@ -67,6 +72,9 @@ public class BookADO {
             }
             else
                 return true;
+        }catch (Exception e){
+            Log.i("Error",e.toString());
         }
+        return false;
     }
 }
