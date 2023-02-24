@@ -55,7 +55,7 @@ public class BookADO {
     }
 
     public static boolean existBook(Context context,String titulo){
-        String sql = "SELECT * FROM Book WHERE book_title = ?";
+        String sql = "SELECT * FROM Book WHERE book_tiitle = ?";
         String[] args = {titulo};
 
         try (SQLiteDatabase db = DBInit.abrirBD(context)){
