@@ -1,6 +1,6 @@
 package com.rmoya.libreria.model;
 
-import com.rmoya.libreria.controller.UserAdapter;
+import com.rmoya.libreria.controller.UserController;
 
 import java.io.Serializable;
 
@@ -17,7 +17,7 @@ public class UserBook implements Serializable {
 
     public UserBook(String title){
         this.title = title;
-        user = UserAdapter.userStatic;
+        user = UserController.userStatic;
         reading = 1;
     }
 
