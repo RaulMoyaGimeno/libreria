@@ -17,10 +17,13 @@ import com.rmoya.libreria.bbdd.UserADO;
 import com.rmoya.libreria.controller.UserController;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.util.Encryptation;
+import com.rmoya.libreria.util.Intents;
 
 public class LoginActivity extends AppCompatActivity {
-EditText txtUserLogin;
-EditText txtPassLogin;
+    EditText txtUserLogin;
+    EditText txtPassLogin;
+    Intents intents = new Intents();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,29 +32,30 @@ EditText txtPassLogin;
         txtPassLogin = findViewById(R.id.txtPassLogin);
         TextView txtCrearUsuario = findViewById(R.id.txtCrearUsuario);
         txtCrearUsuario.setPaintFlags(txtCrearUsuario.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
-        txtCrearUsuario.setOnClickListener(v->{
-            Intent intent = new Intent(getApplicationContext(), NewUserActivity.class);
-            startActivity(intent);
+        txtCrearUsuario.setOnClickListener(v -> {
+            intents.launchActivity(this, NewUserActivity.class);
         });
 
         Button btnAcceder = findViewById(R.id.btnAcceder);
-        btnAcceder.setOnClickListener(v->{
-            if(UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))){
-                CheckBox ch = findViewById(R.id.checkRecordar);
-                if(ch.isChecked()){
-                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("name",txtUserLogin.getText().toString());
-                    editor.apply();
+        btnAcceder.setOnClickListener(v -> {
+            if (UserADO.validateUser(this, txtUserLogin.getText().toString(), Encryptation.encrypt(txtPassLogin.getText().toString()))) {
+                CheckBox checkRecordar = findViewById(R.id.checkRecordar);
+                if (checkRecordar.isChecked()) {
+                    sharePreferences();
                 }
                 UserController.userStatic = txtUserLogin.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), MainScreenActivity.class);
-                startActivity(intent);
+                intents.launchActivity(this, MainScreenActivity.class);
                 finish();
-            } else{
-                Alerts.launchDialogFields(this,"Usuario o contraseña mal","OK");
+            } else {
+                Alerts.launchDialogFields(this, getString(R.string.usuario_contrasena_mal), getString(R.string.cerrar));
             }
         });
+    }
+
+    private void sharePreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", txtUserLogin.getText().toString());
+        editor.apply();
     }
 }

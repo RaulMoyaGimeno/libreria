@@ -8,4 +8,16 @@
     <string name="likes">likes</string>
     <string name="json">json</string>
 
+    <string name="cerrar">Cerrar</string>
+    <string name="usuario_contrasena_mal">El usuario o la contraseña introducidos no son correctos.</string>
+    <string name="nombre_no_introducido">Debes introducir un nombre para poder registrar un nuevo usuario.</string>
+    <string name="user_no_introducido">Debes introducir un nombre de usuario para poder registrar un nuevo usuario.</string>
+    <string name="pass_no_introducido">Debes introducir una contraseña para poder registrar un nuevo usuario.</string>
+    <string name="pass_no_coinciden">Ambas contraseña deben coincidir para poder registrar un nuevo usuario.</string>
+    <string name="user_existente">El nombre de usuario introducido ya existe, prueba con otro.</string>
+    <string name="user_registrado">El usuario ha sido registrado con éxito.</string>
+    <string name="user_no_registrado">El usuario no ha podido ser registrado.</string>
+    <string name="libros_guardados">Tus libros se han guardado correctamente.</string>
+
+
 </resources>

@@ -35,15 +35,15 @@ public class NewUserActivity extends AppCompatActivity {
 
     private void compruebaCampos() {
         if (compruebaTxtVacio(txtNombreRegistro)) {
-            Alerts.launchDialogFields(this, "Nombre vacio", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.nombre_no_introducido), getString(R.string.cerrar));
         } else if (compruebaTxtVacio(txtUserRegistro)) {
-            Alerts.launchDialogFields(this, "Usuari vacio", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.user_no_introducido), getString(R.string.cerrar));
         } else if (UserADO.existUser(this, txtUserRegistro.getText().toString())) {
-            Alerts.launchDialogFields(this, "Usuario ya existe", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.user_existente), getString(R.string.cerrar));
         } else if (compruebaTxtVacio(txtPass1Registro)) {
-            Alerts.launchDialogFields(this, "contraseña vacia", "Cerrar");
+            Alerts.launchDialogFields(this,getString(R.string.pass_no_introducido), getString(R.string.cerrar));
         } else if (!comprobarContraseñas()) {
-            Alerts.launchDialogFields(this, "Contraseñas distintas", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.pass_no_coinciden), getString(R.string.cerrar));
         } else {
             insertarUsuario();
             borrarCampos();
@@ -52,9 +52,9 @@ public class NewUserActivity extends AppCompatActivity {
 
     private void insertarUsuario() {
         if (UserADO.insertUser(this, new User(txtNombreRegistro.getText().toString(), txtUserRegistro.getText().toString(), Encryptation.encrypt(txtPass1Registro.getText().toString())))) {
-            Alerts.launchDialogFields(this, "Registro bien", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.user_registrado), getString(R.string.cerrar));
         } else {
-            Alerts.launchDialogFields(this, "Registro mal", "Cerrar");
+            Alerts.launchDialogFields(this, getString(R.string.user_no_registrado), getString(R.string.cerrar));
         }
     }
 

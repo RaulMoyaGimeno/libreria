@@ -11,8 +11,8 @@
 
     <Button
         android:id="@+id/btnAbrirJson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
         android:layout_marginTop="156dp"
         android:text="Listado de libros"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/btnAbrirBbdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:text="Mis libros"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +32,8 @@
 
     <Button
         android:id="@+id/btnAbrirLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:text="Más gustados"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +42,8 @@
 
     <Button
         android:id="@+id/btnAbrirFavs"
-        android:layout_width="225dp"
-        android:layout_height="42dp"
+        android:layout_width="236dp"
+        android:layout_height="44dp"
         android:layout_marginTop="30dp"
         android:text="favoritos de la gente"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +53,8 @@
 
     <Button
         android:id="@+id/btnCerrarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
         android:layout_marginTop="56dp"
         android:backgroundTint="#FE846A"
         android:text="Cerrar sesión"
