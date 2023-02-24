@@ -1,5 +1,6 @@
 package com.rmoya.libreria.util;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -19,11 +20,13 @@ public class TitleFilter implements TextWatcher {
     RecyclerView recyclerView;
     Class<? extends RecyclerView.Adapter> adapter;
     List<UserBook> list;
+    Context context;
 
-    public TitleFilter(RecyclerView recyclerView, Class<? extends RecyclerView.Adapter> adapter, List<UserBook> list){
+    public TitleFilter(Context context, RecyclerView recyclerView, Class<? extends RecyclerView.Adapter> adapter, List<UserBook> list){
         this.recyclerView = recyclerView;
         this.adapter = adapter;
         this.list = list;
+        this.context = context;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class TitleFilter implements TextWatcher {
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if(adapter == JsonAdapter.class){
-            recyclerView.setAdapter(new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s))));
+            recyclerView.setAdapter(new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s)), context));
         }
         if(adapter == BetterAdapter.class){
             recyclerView.setAdapter(new BetterAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList())));

@@ -43,6 +43,6 @@ public class BBDDActivity extends AppCompatActivity {
 
         TextView txtBuscar = findViewById(R.id.editTextTextPersonName);
 
-        txtBuscar.addTextChangedListener(new TitleFilter(recycler, BBDDAdapter.class, books));
+        txtBuscar.addTextChangedListener(new TitleFilter(this, recycler, BBDDAdapter.class, books));
     }
 }
