@@ -16,18 +16,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class JsonDownloader extends AsyncTask<List<Book>, Void, Void> {
+public class JsonDownloader extends AsyncTask<Void, Void, Void> {
 
     private final String URL = "https://raw.githubusercontent.com/RaulMoyaGimeno/libreria/main/books.json";
 
+    public static List<Book> books = new ArrayList<>();
+
     @Override
-    protected Void doInBackground(List<Book>... books) {
-        String content;
+    protected Void doInBackground(Void... voids) {
+        String content;;
+        books = new ArrayList<>();
         Map<String, Book> booksMap;
         try {
             content = descargarTexto(URL);
@@ -35,10 +39,7 @@ public class JsonDownloader extends AsyncTask<List<Book>, Void, Void> {
             Type mapType = new TypeToken<Map<String, Book>>(){}.getType();
             booksMap = gson.fromJson(content, mapType);
             Log.i("Count: ", String.valueOf(booksMap.size()));
-            for (Book book : booksMap.values()) {
-                Log.i("Book: ", book.toString());
-                books[0].add(book);
-            }
+            books = new ArrayList<>(booksMap.values());
         } catch (IOException e) {
             e.printStackTrace();
         }
