@@ -8,14 +8,14 @@ public class ListBooks {
 
     private static List<Book> books = new ArrayList<>();
 
-    private static long position;
+    private static long position = 0;
 
     public static void init(ArrayList<Book> book){
         books = book;
     }
 
-    public static boolean isEmpty(){
-        return books.isEmpty();
+    public static List<Book> filterByTitle(String title){
+        return books.stream().filter(titulo -> titulo.getBook_title().startsWith(title)).collect(Collectors.toList());
     }
 
     public static List<Book> get50first(){
