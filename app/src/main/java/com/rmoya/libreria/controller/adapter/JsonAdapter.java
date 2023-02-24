@@ -15,15 +15,16 @@ import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.view.BBDDActivity;
+import com.rmoya.libreria.view.ShowBookActivity;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> implements RegisterAdapter {
 
-    private final List<Book> LibroLista;
+    private final List<Book> libroLista;
 
-    public JsonAdapter(List<Book> libroLista) {LibroLista = libroLista;}
+    public JsonAdapter(List<Book> libroLista) {this.libroLista = libroLista;}
 
 
     @NonNull
@@ -36,26 +37,25 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull JsonAdapter.ViewHolder holder, int position) {
-        Book libro = new Book();
+
+        Book book = libroLista.get(position);
 
 
-
-        holder.txtTitulo.setText(libro.getBook_title());
+        holder.txtTitulo.setText(book.getBook_title());
         //holder.txtFavs.setText(libro.getFav());
-        holder.txtAutor.setText(libro.getAuthor());
+        holder.txtAutor.setText(book.getAuthor());
         //holder.txtLikes.setText(libro.getLiked());
 
 
         holder.itemView.setOnClickListener(v->{
-
-            Intent intent = new Intent(v.getContext(), BBDDActivity.class);
-            intent.putExtra("array",libro);
+            Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
+            intent.putExtra("libro",book);
             v.getContext().startActivity(intent);
         });
     }
 
     @Override
-    public int getItemCount() {return LibroLista.size();}
+    public int getItemCount() {return libroLista.size();}
 
     @Override
     public void onRegister() {

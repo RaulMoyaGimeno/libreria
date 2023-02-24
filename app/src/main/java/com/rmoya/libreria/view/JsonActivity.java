@@ -15,12 +15,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.rmoya.libreria.R;
+import com.rmoya.libreria.bbdd.BookADO;
 import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.controller.adapter.BetterAdapter;
 import com.rmoya.libreria.controller.adapter.JsonAdapter;
 import com.rmoya.libreria.controller.adapter.RegisterAdapter;
 import com.rmoya.libreria.model.Book;
+import com.rmoya.libreria.model.ListBooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,20 +54,16 @@ public class JsonActivity extends AppCompatActivity {
         if(libro.equals(getString(R.string.json))){
             Log.i("fsfs","Hello");
 
-            if(JsonDownloader.books.isEmpty()){
-                new JsonDownloader().execute();
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            adapter = new JsonAdapter(ListBooks.get50first());
 
-            }
-            adapter = new JsonAdapter(JsonDownloader.books);
         }else if(libro.equals(getString(R.string.likes))){
+
          adapter = new BetterAdapter(UserBookADO.orderByFav(this));
-        }else {
+
+        }else{
+
          adapter = new BetterAdapter(UserBookADO.orderByFav(this));
+
         }
         recycler.setAdapter(adapter);
 
@@ -77,6 +75,9 @@ public class JsonActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                
+
                 // Este método se activará cada vez que el usuario escriba o borre texto en el EditText
                 // Aquí puedes agregar el código para buscar en tu base de datos o servidor los resultados que coincidan con el texto ingresado
                 // Después de obtener los resultados, puedes mostrarlos en una lista o en otro elemento de tu interfaz de usuario

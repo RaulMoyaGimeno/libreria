@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.DBInit;
+import com.rmoya.libreria.controller.JsonDownloader;
 
 import java.util.prefs.Preferences;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DBInit.inicializarSqlite(this,R.raw.libreria);
-
+        new JsonDownloader().execute();
         Class<?> clase = LoginActivity.class;
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
