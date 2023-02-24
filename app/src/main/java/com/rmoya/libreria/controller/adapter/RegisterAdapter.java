@@ -18,10 +18,10 @@ public interface RegisterAdapter {
         userBooks.add(userBook);
         ArrayList<Book> books = new ArrayList<>();
         books.add(book);
-        if(UserBookADO.existUserBook(context, userBook.getUser(), userBook.getTitle())){
+        if(!UserBookADO.existUserBook(context, userBook.getUser(), userBook.getTitle())){
             UserBookADO.insertUserBooks(context, userBooks);
         }
-        if(BookADO.existBook(context, book.getBook_title())){
+        if(!BookADO.existBook(context, book.getBook_title())){
             BookADO.insertBooks(context, books);
         }
     }
