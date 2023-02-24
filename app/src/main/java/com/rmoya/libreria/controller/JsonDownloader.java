@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rmoya.libreria.model.Book;
+import com.rmoya.libreria.model.ListBooks;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,12 +27,9 @@ public class JsonDownloader extends AsyncTask<Void, Void, Void> {
 
     private final String URL = "https://raw.githubusercontent.com/RaulMoyaGimeno/libreria/main/books.json";
 
-    public static List<Book> books = new ArrayList<>();
-
     @Override
     protected Void doInBackground(Void... voids) {
-        String content;;
-        books = new ArrayList<>();
+        String content;
         Map<String, Book> booksMap;
         try {
             content = descargarTexto(URL);
@@ -39,7 +37,7 @@ public class JsonDownloader extends AsyncTask<Void, Void, Void> {
             Type mapType = new TypeToken<Map<String, Book>>(){}.getType();
             booksMap = gson.fromJson(content, mapType);
             Log.i("Count: ", String.valueOf(booksMap.size()));
-            books = new ArrayList<>(booksMap.values());
+            ListBooks.init(new ArrayList<>(booksMap.values()));
         } catch (IOException e) {
             e.printStackTrace();
         }
