@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        DBInit.inicializarSqlite(this,R.raw.libreria);
         new JsonDownloader().execute();
+        DBInit.inicializarSqlite(this,R.raw.libreria);
+
         Class<?> clase = LoginActivity.class;
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);

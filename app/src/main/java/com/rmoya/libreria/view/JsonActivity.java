@@ -13,6 +13,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.BookADO;
@@ -32,8 +34,9 @@ public class JsonActivity extends AppCompatActivity {
     Button btnguardar;
     private List<Book> lista = new ArrayList<>();
     private EditText txtbuscar;
-    private CheckBox seleccion;
-    private RecyclerView.Adapter adapter;
+    private RegisterAdapter adapter;
+    private ImageView imgderecha;
+    private ImageView imgizquierda;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class JsonActivity extends AppCompatActivity {
 
         txtbuscar = findViewById(R.id.txtBuscarJson);
         btnguardar = findViewById(R.id.btnGuardarJson);
+        imgderecha = findViewById(R.id.imgDerecha);
+        imgizquierda = findViewById(R.id.imgIzquierda);
 
         Intent intent = getIntent();
 
@@ -54,7 +59,7 @@ public class JsonActivity extends AppCompatActivity {
         if(libro.equals(getString(R.string.json))){
             Log.i("fsfs","Hello");
 
-            adapter = new JsonAdapter(ListBooks.get50first());
+            adapter = new JsonAdapter(ListBooks.get50first(),this);
 
         }else if(libro.equals(getString(R.string.likes))){
 
@@ -65,36 +70,36 @@ public class JsonActivity extends AppCompatActivity {
          adapter = new BetterAdapter(UserBookADO.orderByFav(this));
 
         }
-        recycler.setAdapter(adapter);
+        recycler.setAdapter((RecyclerView.Adapter) adapter);
 
         txtbuscar.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No se requiere ninguna acción antes de cambiar el texto
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                
+                adapter = new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s)),getApplicationContext());
 
-                // Este método se activará cada vez que el usuario escriba o borre texto en el EditText
-                // Aquí puedes agregar el código para buscar en tu base de datos o servidor los resultados que coincidan con el texto ingresado
-                // Después de obtener los resultados, puedes mostrarlos en una lista o en otro elemento de tu interfaz de usuario
+                recycler.setAdapter((RecyclerView.Adapter) adapter);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
 
         });
 
         btnguardar.setOnClickListener(v->{
-
-
+           adapter.onRegister();
         });
 
+       imgderecha.setOnClickListener(v->{
+           adapter = new JsonAdapter(ListBooks.get50next(),this);
+       });
+
+       imgizquierda.setOnClickListener(v->{
+           adapter = new JsonAdapter(ListBooks.get50previous(),this);
+       });
 
     }
 }

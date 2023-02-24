@@ -1,16 +1,20 @@
 package com.rmoya.libreria.controller.adapter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rmoya.libreria.R;
+import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
@@ -18,15 +22,21 @@ import com.rmoya.libreria.view.BBDDActivity;
 import com.rmoya.libreria.view.ShowBookActivity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> implements RegisterAdapter {
 
     private final List<Book> libroLista;
+    private Context context;
+    public JsonAdapter(List<Book> libroLista, Context context) {
+        this.libroLista = libroLista;
+        this.context = context;
+    }
 
-    public JsonAdapter(List<Book> libroLista) {this.libroLista = libroLista;}
-
-
+    private Set<Integer> posiciones = new HashSet<>();
     @NonNull
     @Override
     public JsonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,9 +52,8 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
 
         holder.txtTitulo.setText(book.getBook_title());
-        //holder.txtFavs.setText(libro.getFav());
+        //holder.txtlike.setText();
         holder.txtAutor.setText(book.getAuthor());
-        //holder.txtLikes.setText(libro.getLiked());
 
 
         holder.itemView.setOnClickListener(v->{
@@ -52,6 +61,8 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
             intent.putExtra("libro",book);
             v.getContext().startActivity(intent);
         });
+
+
     }
 
     @Override
@@ -60,21 +71,39 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
     @Override
     public void onRegister() {
 
+        Log.i("count",posiciones.size() + "");
+
+        for (Integer i : posiciones) {
+            UserBook userbook = new UserBook(libroLista.get(i).getBook_title());
+            register(context,libroLista.get(i),userbook);
+        }
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitulo;
-        TextView txtFavs;
         CheckBox checkGuardar;
         TextView txtAutor;
-        TextView txtLikes;
+        TextView txtlike;
+        TextView txtfavs;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
-            txtFavs = itemView.findViewById(R.id.txtFavs);
             checkGuardar = itemView.findViewById(R.id.checkGuardar);
             txtAutor = itemView.findViewById(R.id.txtAutor);
-            txtLikes = itemView.findViewById(R.id.txtLikes);
+
+            checkGuardar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        posiciones.add(getAdapterPosition());
+                    }else{
+                        posiciones.remove(getAdapterPosition());
+                    }
+                }
+            });
+
         }
     }
 }
