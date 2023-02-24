@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonActivity extends AppCompatActivity {
-    public String libro;
+    private String libro;
     Button btnguardar;
-    public List<Book> lista = new ArrayList<>();
-    public EditText txtbuscar;
-    public CheckBox seleccion;
+    private List<Book> lista = new ArrayList<>();
+    private EditText txtbuscar;
+    private CheckBox seleccion;
     private RecyclerView.Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +51,17 @@ public class JsonActivity extends AppCompatActivity {
        libro = intent.getStringExtra(getString(R.string.mostrar));
         if(libro.equals(getString(R.string.json))){
             Log.i("fsfs","Hello");
-            Handler handler = new Handler();
-            handler.postDelayed(() -> {
-                new JsonDownloader().execute(lista);
-            }, 3000);
-            adapter = new JsonAdapter(lista);
+
+            if(JsonDownloader.books.isEmpty()){
+                new JsonDownloader().execute();
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            adapter = new JsonAdapter(JsonDownloader.books);
         }else if(libro.equals(getString(R.string.likes))){
          adapter = new BetterAdapter(UserBookADO.orderByFav(this));
         }else {
