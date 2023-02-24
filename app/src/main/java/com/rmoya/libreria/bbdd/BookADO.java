@@ -20,7 +20,7 @@ public class BookADO {
 
             for (Book book : lista) {
                 ContentValues cv = new ContentValues();
-                cv.put("book_title", book.getBook_title());
+                cv.put("book_tiitle", book.getBook_title());
                 cv.put("author", book.getAuthor());
                 cv.put("edition", book.getEdition());
                 cv.put("openurl", book.getOpenurl());
