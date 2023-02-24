@@ -110,9 +110,9 @@ public class UserBookADO {
         return books;
     }
 
-    public static boolean existUserBook(Context context,int clave){
-        String sql = "SELECT * FROM UserBook WHERE id = ?";
-        String[] args = {String.valueOf(clave)};
+    public static boolean existUserBook(Context context,String usuario,String titulo){
+        String sql = "SELECT * FROM UserBook WHERE user = ? AND title=?";
+        String[] args = {usuario,titulo};
 
         try (SQLiteDatabase db = DBInit.abrirBD(context)){
             Cursor cursor = db.rawQuery(sql, args);
