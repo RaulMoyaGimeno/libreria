@@ -14,12 +14,10 @@ public interface RegisterAdapter {
     void onRegister();
 
     default void register(Context context, Book book, UserBook userBook){
-        ArrayList<UserBook> userBooks = new ArrayList<>();
-        userBooks.add(userBook);
         ArrayList<Book> books = new ArrayList<>();
         books.add(book);
         if(!UserBookADO.existUserBook(context, userBook.getUser(), userBook.getTitle())){
-            UserBookADO.insertUserBooks(context, userBooks);
+            UserBookADO.insertUserBook(context, userBook);
         }
         if(!BookADO.existBook(context, book.getBook_title())){
             BookADO.insertBooks(context, books);
