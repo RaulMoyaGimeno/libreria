@@ -33,7 +33,7 @@ public class BookADO {
 
     public static Book getByTitle(Context context, String titulo){
 
-        String sql ="SELECT * FROM Book WHERE book_title=? ";
+        String sql ="SELECT * FROM Book WHERE book_tiitle=? ";
         String[] args = { titulo };
         Book book = new Book();
 
