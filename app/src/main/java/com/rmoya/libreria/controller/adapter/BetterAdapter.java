@@ -1,55 +1,64 @@
 package com.rmoya.libreria.controller.adapter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rmoya.libreria.R;
+import com.rmoya.libreria.bbdd.BookADO;
+import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
+import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.view.BBDDActivity;
+import com.rmoya.libreria.view.ShowBookActivity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder> implements RegisterAdapter {
 
-    private final List<UserBook> LibroLista;
+    private final List<UserBook> libroLista;
+    private Context context;
+    public BetterAdapter(List<UserBook> libroLista, Context context) {
+        this.libroLista = libroLista;
+        this.context = context;
+    }
 
-    public BetterAdapter(List<UserBook> libroLista) {LibroLista = libroLista;}
-
+    private Set<Integer> posiciones = new HashSet<>();
     @NonNull
     @Override
     public BetterAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.card_checkbox_layout, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BetterAdapter.ViewHolder holder, int position) {
 
-        UserBook libro = new UserBook();
+        UserBook book = libroLista.get(position);
 
 
-
-        holder.txtTitulo.setText(libro.getTitle());
-        holder.txtFavs.setText(libro.getFav());
-        holder.txtAutor.setText(libro.getUser());
-        holder.txtLikes.setText(libro.getLiked());
+        holder.txtTitulo.setText(book.getTitle());
+        holder.txtlike.setText(String.valueOf(book.getLiked()));
+        holder.txtfavs.setText(String.valueOf(book.getFav()));
 
 
         holder.itemView.setOnClickListener(v->{
-
-            Intent intent = new Intent(v.getContext(), BBDDActivity.class);
-            intent.putExtra("array",libro);
+            Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
+            intent.putExtra("libro",book);
             v.getContext().startActivity(intent);
         });
 
@@ -57,28 +66,44 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
     }
 
     @Override
-    public int getItemCount() {return LibroLista.size();}
+    public int getItemCount() {return libroLista.size();}
 
     @Override
     public void onRegister() {
 
+        Log.i("count",posiciones.size() + "");
+
+        for (Integer i : posiciones) {
+            Book book = BookADO.getByTitle(context,libroLista.get(i).getTitle());
+            register(context,book,libroLista.get(i));
+        }
+
+        Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView txtTitulo;
-        TextView txtFavs;
         CheckBox checkGuardar;
-        TextView txtAutor;
-        TextView txtLikes;
-
+        TextView txtlike;
+        TextView txtfavs;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
-            txtFavs = itemView.findViewById(R.id.txtFavs);
             checkGuardar = itemView.findViewById(R.id.checkGuardar);
-            txtAutor = itemView.findViewById(R.id.txtAutor);
-            txtLikes = itemView.findViewById(R.id.txtLikes);
+
+
+            checkGuardar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        posiciones.add(getAdapterPosition());
+                    }else{
+                        posiciones.remove(getAdapterPosition());
+                    }
+                }
+            });
 
         }
     }

@@ -1,5 +1,6 @@
 package com.rmoya.libreria.controller.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.UserBook;
+import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.view.BBDDActivity;
 import com.rmoya.libreria.view.ShowBookActivity;
 
@@ -77,6 +79,8 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
             UserBook userbook = new UserBook(libroLista.get(i).getBook_title());
             register(context,libroLista.get(i),userbook);
         }
+
+        Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));
 
 
     }

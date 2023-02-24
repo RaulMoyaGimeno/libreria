@@ -25,6 +25,8 @@ import com.rmoya.libreria.controller.adapter.JsonAdapter;
 import com.rmoya.libreria.controller.adapter.RegisterAdapter;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.ListBooks;
+import com.rmoya.libreria.model.UserBook;
+import com.rmoya.libreria.util.TitleFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,7 @@ public class JsonActivity extends AppCompatActivity {
     private String libro;
     Button btnguardar;
     private List<Book> lista = new ArrayList<>();
+    private List<UserBook> userbook = new ArrayList<>();
     private EditText txtbuscar;
     private RegisterAdapter adapter;
     private ImageView imgderecha;
@@ -62,32 +65,17 @@ public class JsonActivity extends AppCompatActivity {
             adapter = new JsonAdapter(ListBooks.get50first(),this);
 
         }else if(libro.equals(getString(R.string.likes))){
-
-         adapter = new BetterAdapter(UserBookADO.orderByFav(this));
+            userbook = UserBookADO.orderByLike(this);
+         adapter = new BetterAdapter(userbook,this);
 
         }else{
-
-         adapter = new BetterAdapter(UserBookADO.orderByFav(this));
+            userbook = UserBookADO.orderByFav(this);
+         adapter = new BetterAdapter(userbook,this);
 
         }
         recycler.setAdapter((RecyclerView.Adapter) adapter);
 
-        txtbuscar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                adapter = new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s)),getApplicationContext());
-
-                recycler.setAdapter((RecyclerView.Adapter) adapter);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-
-        });
+        txtbuscar.addTextChangedListener(new TitleFilter(this,recycler,adapter.getClass(),userbook));
 
         btnguardar.setOnClickListener(v->{
            adapter.onRegister();
