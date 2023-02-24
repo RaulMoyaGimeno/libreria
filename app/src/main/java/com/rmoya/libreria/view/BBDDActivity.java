@@ -27,11 +27,7 @@ public class BBDDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bbddactivity);
 
-        //List<UserBook> books = UserBookADO.getByUser(this, UserController.userStatic);
-
-        List<UserBook> books = new ArrayList<>();
-        books.add(new UserBook("Pepito"));
-        books.add(new UserBook("Papito"));
+        List<UserBook> books = UserBookADO.getByUser(this, UserController.userStatic);
 
         RecyclerView recycler = findViewById(R.id.recyclerBbdd);
         recycler.setHasFixedSize(true);
