@@ -18,6 +18,6 @@
     <string name="user_registrado">El usuario ha sido registrado con éxito.</string>
     <string name="user_no_registrado">El usuario no ha podido ser registrado.</string>
     <string name="libros_guardados">Tus libros se han guardado correctamente.</string>
-
+    <string name="libros_title">Tus libros se han guardado correctamente.</string>
 
 </resources>

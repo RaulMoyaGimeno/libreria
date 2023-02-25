@@ -19,6 +19,7 @@ import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.User;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.util.Alerts;
+import com.rmoya.libreria.util.Notificate;
 import com.rmoya.libreria.view.BBDDActivity;
 import com.rmoya.libreria.view.ShowBookActivity;
 
@@ -83,7 +84,7 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
         }
 
         Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));
-
+        Notificate.notify(context, context.getString(R.string.libros_title), context.getString(R.string.libros_guardados));
 
     }
 

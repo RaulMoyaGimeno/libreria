@@ -19,8 +19,10 @@ import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.model.Book;
 import com.rmoya.libreria.model.ListBooks;
+import com.rmoya.libreria.model.User;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.util.Alerts;
+import com.rmoya.libreria.util.Notificate;
 import com.rmoya.libreria.view.BBDDActivity;
 import com.rmoya.libreria.view.ShowBookActivity;
 
@@ -33,10 +35,12 @@ import java.util.Set;
 public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> implements RegisterAdapter {
 
     private final List<Book> libroLista;
+    private List<UserBook> userBooks;
     private Context context;
     public JsonAdapter(List<Book> libroLista, Context context) {
         this.libroLista = libroLista;
         this.context = context;
+        userBooks = UserBookADO.orderByFav(context);
     }
 
     private Set<Integer> posiciones = new HashSet<>();
@@ -68,6 +72,16 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
         });
 
+        userBooks.stream()
+                .filter(userBook -> userBook.getTitle()
+                .equals(book.getBook_title()))
+                .findFirst()
+                .ifPresent(userBook -> {
+                    holder.txtlike.setText(String.valueOf(userBook.getLiked()));
+                    holder.txtfav.setText(String.valueOf(userBook.getFav()));
+                });
+
+
 
     }
 
@@ -85,7 +99,7 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
         }
 
         Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));
-
+        Notificate.notify(context, context.getString(R.string.libros_title), context.getString(R.string.libros_guardados));
 
     }
 
@@ -94,7 +108,7 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
         CheckBox checkGuardar;
         TextView txtAutor;
         TextView txtlike;
-        TextView txtfavs;
+        TextView txtfav;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
