@@ -65,6 +65,18 @@ public class ShowBookActivity extends AppCompatActivity {
         showData();
         cargarWeb(book.getOpenurl());
 
+        checkLike.setOnCheckedChangeListener((v,state)->{
+            if(state){
+                checkDislike.setChecked(false);
+            }
+        });
+
+        checkDislike.setOnCheckedChangeListener((v,state)->{
+            if(state){
+                checkLike.setChecked(false);
+            }
+        });
+
         if(UserBookADO.existUserBook(this,userBook.getUser(),userBook.getTitle())){
             //Si el userbook existe
             stateUserBook(userBook);
@@ -117,11 +129,7 @@ public class ShowBookActivity extends AppCompatActivity {
     }
 
     private void stateAtribute(int atributo, CheckBox check){
-        if(atributo==1){
-            check.setChecked(true);
-        }else{
-            check.setChecked(false);
-        }
+        check.setChecked(atributo!=0);
     }
 
     private void updateCheck(UserBook ub){
@@ -156,6 +164,4 @@ public class ShowBookActivity extends AppCompatActivity {
             ub.setReading(0);
         }
     }
-
-
 }

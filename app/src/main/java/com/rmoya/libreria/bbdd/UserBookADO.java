@@ -16,7 +16,7 @@ public class UserBookADO {
 
     public static List<UserBook> orderByFav(Context context){
         List<UserBook> books = new ArrayList<>();
-        String sql ="SELECT title, fav FROM UserBook GROUP by title order by fav DESC";
+        String sql ="SELECT title, SUM(fav) as sum FROM UserBook GROUP by title order by sum DESC";
 
         try(SQLiteDatabase db =DBInit.abrirBD(context)){
             Cursor cursor =db.rawQuery(sql,null);
@@ -36,7 +36,7 @@ public class UserBookADO {
 
     public static List<UserBook> orderByLike(Context context){
         List<UserBook> books = new ArrayList<>();
-        String sql ="SELECT title, fav FROM UserBook GROUP by title order by liked DESC";
+        String sql ="SELECT title, SUM(liked) as sum FROM UserBook GROUP by title order by sum DESC";
 
         try(SQLiteDatabase db =DBInit.abrirBD(context)){
             Cursor cursor =db.rawQuery(sql,null);
