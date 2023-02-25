@@ -2,6 +2,8 @@ package com.rmoya.libreria.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.DBInit;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.controller.UserController;
+import com.rmoya.libreria.util.Notificate;
 
 import java.util.prefs.Preferences;
 
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             clase = MainScreenActivity.class;
             UserController.userStatic = sp.getString("name","undefined");
         }
+
+        Notificate.createChannel(this);
 
         Handler handler = new Handler(Looper.myLooper());
 

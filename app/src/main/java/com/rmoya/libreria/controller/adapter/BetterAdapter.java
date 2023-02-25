@@ -62,8 +62,7 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
             Intent intent = new Intent(v.getContext(), ShowBookActivity.class);
             intent.putExtra("userbook",book);
             Book books = BookADO.getByTitle(v.getContext(), book.getTitle());
-            Log.i("Book: ", book.toString());
-            intent.putExtra("libro", book);
+            intent.putExtra("libro", books);
             v.getContext().startActivity(intent);
         });
 
@@ -80,7 +79,7 @@ public class BetterAdapter extends RecyclerView.Adapter<BetterAdapter.ViewHolder
 
         for (Integer i : posiciones) {
             Book book = BookADO.getByTitle(context,libroLista.get(i).getTitle());
-            register(context,book,libroLista.get(i));
+            register(context,book,new UserBook(book.getBook_title()));
         }
 
         Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));

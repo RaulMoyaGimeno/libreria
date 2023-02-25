@@ -18,6 +18,7 @@ import com.rmoya.libreria.R;
 import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.controller.JsonDownloader;
 import com.rmoya.libreria.model.Book;
+import com.rmoya.libreria.model.ListBooks;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.view.BBDDActivity;
@@ -54,7 +55,7 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
 
         holder.txtTitulo.setText(book.getBook_title());
-        //holder.txtlike.setText();
+        holder.checkGuardar.setChecked(book.isSelected());
         holder.txtAutor.setText(book.getAuthor());
 
 
@@ -78,9 +79,9 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
 
         Log.i("count",posiciones.size() + "");
 
-        for (Integer i : posiciones) {
-            UserBook userbook = new UserBook(libroLista.get(i).getBook_title());
-            register(context,libroLista.get(i),userbook);
+        for (Book book : ListBooks.getSelectedBooks()) {
+            UserBook userbook = new UserBook(book.getBook_title());
+            register(context, book, userbook);
         }
 
         Alerts.launchDialogFields(context, context.getString(R.string.libros_guardados), context.getString(R.string.cerrar));
@@ -100,16 +101,7 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
             checkGuardar = itemView.findViewById(R.id.checkGuardar);
             txtAutor = itemView.findViewById(R.id.txtAutor);
 
-            checkGuardar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        posiciones.add(getAdapterPosition());
-                    }else{
-                        posiciones.remove(getAdapterPosition());
-                    }
-                }
-            });
+            checkGuardar.setOnCheckedChangeListener((buttonView, isChecked) -> ListBooks.changeState(getAdapterPosition()));
 
         }
     }

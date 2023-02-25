@@ -67,11 +67,13 @@ public class JsonActivity extends AppCompatActivity {
         }else if(libro.equals(getString(R.string.likes))){
             userbook = UserBookADO.orderByLike(this);
          adapter = new BetterAdapter(userbook,this);
-
+            imgizquierda.setEnabled(false);
+            imgderecha.setEnabled(false);
         }else{
             userbook = UserBookADO.orderByFav(this);
          adapter = new BetterAdapter(userbook,this);
-
+            imgizquierda.setEnabled(false);
+            imgderecha.setEnabled(false);
         }
         recycler.setAdapter((RecyclerView.Adapter) adapter);
 
@@ -82,11 +84,15 @@ public class JsonActivity extends AppCompatActivity {
         });
 
        imgderecha.setOnClickListener(v->{
+           if(!txtbuscar.getText().toString().equals("")) return;
            adapter = new JsonAdapter(ListBooks.get50next(),this);
+           recycler.setAdapter((RecyclerView.Adapter) adapter);
        });
 
        imgizquierda.setOnClickListener(v->{
+           if(!txtbuscar.getText().toString().equals("")) return;
            adapter = new JsonAdapter(ListBooks.get50previous(),this);
+           recycler.setAdapter((RecyclerView.Adapter) adapter);
        });
 
     }
