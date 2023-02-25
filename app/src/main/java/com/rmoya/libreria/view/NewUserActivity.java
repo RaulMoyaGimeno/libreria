@@ -11,6 +11,7 @@ import com.rmoya.libreria.bbdd.UserADO;
 import com.rmoya.libreria.model.User;
 import com.rmoya.libreria.util.Alerts;
 import com.rmoya.libreria.util.Encryptation;
+import com.rmoya.libreria.util.Notificate;
 
 public class NewUserActivity extends AppCompatActivity {
     EditText txtNombreRegistro;
@@ -53,6 +54,7 @@ public class NewUserActivity extends AppCompatActivity {
     private void insertarUsuario() {
         if (UserADO.insertUser(this, new User(txtNombreRegistro.getText().toString(), txtUserRegistro.getText().toString(), Encryptation.encrypt(txtPass1Registro.getText().toString())))) {
             Alerts.launchDialogFields(this, getString(R.string.user_registrado), getString(R.string.cerrar));
+            Notificate.notify(this,"Usuario registrado",getString(R.string.user_registrado));
         } else {
             Alerts.launchDialogFields(this, getString(R.string.user_no_registrado), getString(R.string.cerrar));
         }
