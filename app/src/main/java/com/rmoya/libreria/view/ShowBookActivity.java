@@ -122,10 +122,11 @@ public class ShowBookActivity extends AppCompatActivity {
     private void stateUserBook(UserBook ub){
         stateAtribute(ub.getFav(),checkFavs);
         stateAtribute(ub.getDiscard(),checkDiscard);
-        stateAtribute(ub.getLiked(),checkLike);
-        stateAtribute(ub.getLiked(),checkDislike);
         stateAtribute(ub.getRead(),checkRead);
         stateAtribute(ub.getReading(),checkReading);
+        checkLike.setChecked(ub.getLiked()==1);
+        checkDislike.setChecked(ub.getLiked()==-1);
+
     }
 
     private void stateAtribute(int atributo, CheckBox check){
