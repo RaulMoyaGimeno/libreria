@@ -32,17 +32,6 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:button="@drawable/check"
-                android:checked="true"
-                android:clickable="false"
-                android:theme="@style/Theme.verde" />
-
-            <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,6 +41,17 @@
                 android:checked="true"
                 android:clickable="false"
                 android:theme="@style/Theme.amrillo" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:button="@drawable/check"
+                android:checked="true"
+                android:clickable="false"
+                android:theme="@style/Theme.verde" />
 
             <CheckBox
                 android:id="@+id/checkBox3"
