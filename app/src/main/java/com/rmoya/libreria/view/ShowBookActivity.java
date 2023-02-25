@@ -135,11 +135,11 @@ public class ShowBookActivity extends AppCompatActivity {
 
     private void updateCheck(UserBook ub){
 
-        if(checkFavs.isChecked()){
+        /*if(checkFavs.isChecked()){
             ub.setFav(1);
         }else{
             ub.setFav(0);
-        }
+        }*/
         if(checkLike.isChecked()){
             ub.setLiked(1);
             checkDislike.setChecked(false);
@@ -149,7 +149,7 @@ public class ShowBookActivity extends AppCompatActivity {
         }else{
             ub.setLiked(0);
         }
-        if(checkDiscard.isChecked()){
+        /*if(checkDiscard.isChecked()){
             ub.setDiscard(1);
         }else{
             ub.setDiscard(0);
@@ -163,6 +163,19 @@ public class ShowBookActivity extends AppCompatActivity {
             ub.setReading(1);
         }else{
             ub.setReading(0);
+        }*/
+
+        ub.setRead(stateCheck(checkRead));
+        ub.setReading(stateCheck(checkReading));
+        ub.setDiscard(stateCheck(checkDiscard));
+        ub.setFav(stateCheck(checkFavs));
+    }
+
+    private int stateCheck(CheckBox check){
+        if(checkFavs.isChecked()){
+            return 1;
+        }else{
+            return 0;
         }
     }
 }
