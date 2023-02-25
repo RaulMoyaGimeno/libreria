@@ -10,6 +10,7 @@ public class Book implements Serializable {
     private String openurl;
     private String pdf_url;
     private String isbn;
+    private boolean isSelected = false;
 
     public Book(String book_title, String author, String edition, String openurl, String pdf_url, String isbn) {
         this.book_title = book_title;
@@ -68,6 +69,14 @@ public class Book implements Serializable {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void changeSelected() {
+        isSelected = !isSelected();
     }
 
     @Override

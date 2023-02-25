@@ -1,7 +1,10 @@
 package com.rmoya.libreria.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ListBooks {
@@ -9,43 +12,54 @@ public class ListBooks {
     private static List<Book> books = new ArrayList<>();
 
     private static long position = 0;
+    private static final long MAX_BOOKS = 10;
 
-    public static void init(ArrayList<Book> book){
+    public static void init(@NonNull ArrayList<Book> book){
         books = book;
     }
 
+    public static void changeState(int positionAdapter){
+        books.get((int) (positionAdapter + position)).changeSelected();
+    }
+
+    public static boolean isSelected(int positionAdapter){
+        return books.get((int) (positionAdapter + position)).isSelected();
+    }
+
+    public static List<Book> getSelectedBooks(){
+        return books.stream()
+                .filter(Book::isSelected)
+                .peek(Book::changeSelected)
+                .collect(Collectors.toList());
+    }
+
     public static List<Book> filterByTitle(String title){
-        return books.stream().filter(titulo -> titulo.getBook_title().startsWith(title)).collect(Collectors.toList());
+        return books.stream()
+                .filter(book ->
+                        book.getBook_title().toUpperCase(Locale.ROOT)
+                                .startsWith(title.toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toList());
     }
 
     public static List<Book> get50first(){
-        position = 50;
-        return books.stream().limit(50).collect(Collectors.toList());
+        return getFromPosition();
     }
 
     public static List<Book> get50previous(){
-        if(position == 0){
-            position = books.size() - 50;
-        }
-        else {
-            position -= 50;
-            if (position < 0) {
-                position = 0;
-            }
-        }
-        return books.stream().skip(position).limit(50).collect(Collectors.toList());
+        position = position == 0 ? books.size() - MAX_BOOKS : position - MAX_BOOKS;
+        if (position < 0) position = 0;
+        return getFromPosition();
     }
 
     public static List<Book> get50next(){
-        if(position == books.size()){
-            position = 50;
-        }
-        else {
-            position += 50;
-            if (position > books.size()) {
-                position = books.size();
-            }
-        }
-        return books.stream().skip(position - 50).limit(50).collect(Collectors.toList());
+        position = position >= books.size() - MAX_BOOKS ? 0 : position + MAX_BOOKS;
+        return getFromPosition();
+    }
+
+    private static List<Book> getFromPosition(){
+        return books.stream()
+                .skip(position)
+                .limit(MAX_BOOKS)
+                .collect(Collectors.toList());
     }
 }

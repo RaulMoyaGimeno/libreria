@@ -2,6 +2,8 @@ package com.rmoya.libreria.controller.adapter;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.rmoya.libreria.bbdd.BookADO;
 import com.rmoya.libreria.bbdd.UserBookADO;
 import com.rmoya.libreria.model.Book;
@@ -13,7 +15,7 @@ public interface RegisterAdapter {
 
     void onRegister();
 
-    default void register(Context context, Book book, UserBook userBook){
+    default void register(Context context, Book book, @NonNull UserBook userBook){
         ArrayList<Book> books = new ArrayList<>();
         books.add(book);
         if(!UserBookADO.existUserBook(context, userBook.getUser(), userBook.getTitle())){

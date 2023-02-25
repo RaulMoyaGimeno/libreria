@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rmoya.libreria.controller.adapter.BBDDAdapter;
@@ -13,6 +14,7 @@ import com.rmoya.libreria.model.ListBooks;
 import com.rmoya.libreria.model.UserBook;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class TitleFilter implements TextWatcher {
@@ -40,11 +42,21 @@ public class TitleFilter implements TextWatcher {
             recyclerView.setAdapter(new JsonAdapter(ListBooks.filterByTitle(String.valueOf(s)), context));
         }
         if(adapter == BetterAdapter.class){
-            recyclerView.setAdapter(new BetterAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList()), context));
+            recyclerView.setAdapter(new BetterAdapter(filterList(s), context));
         }
         if(adapter == BBDDAdapter.class){
-            recyclerView.setAdapter(new BBDDAdapter(list.stream().filter(userBook -> userBook.getTitle().startsWith(String.valueOf(s))).collect(Collectors.toList())));
+            recyclerView.setAdapter(new BBDDAdapter(filterList(s)));
         }
+
+    }
+
+    @NonNull
+    private List<UserBook> filterList(CharSequence s) {
+        return list.stream()
+                .filter(userBook ->
+                        userBook.getTitle().toUpperCase(Locale.ROOT)
+                                .startsWith(String.valueOf(s).toUpperCase(Locale.ROOT)))
+                .collect(Collectors.toList());
     }
 
     @Override

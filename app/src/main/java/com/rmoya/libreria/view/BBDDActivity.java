@@ -1,5 +1,6 @@
 package com.rmoya.libreria.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,9 +27,20 @@ public class BBDDActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bbddactivity);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         List<UserBook> books = UserBookADO.getByUser(this, UserController.userStatic);
+        RecyclerView recycler = initRecycler(books);
 
+        TextView txtBuscar = findViewById(R.id.editTextTextPersonName);
+        txtBuscar.addTextChangedListener(new TitleFilter(this, recycler, BBDDAdapter.class, books));
+    }
+
+    @NonNull
+    private RecyclerView initRecycler(List<UserBook> books) {
         RecyclerView recycler = findViewById(R.id.recyclerBbdd);
         recycler.setHasFixedSize(true);
 
@@ -36,9 +48,6 @@ public class BBDDActivity extends AppCompatActivity {
         recycler.setLayoutManager(layoutManager);
 
         recycler.setAdapter(new BBDDAdapter(books));
-
-        TextView txtBuscar = findViewById(R.id.editTextTextPersonName);
-
-        txtBuscar.addTextChangedListener(new TitleFilter(this, recycler, BBDDAdapter.class, books));
+        return recycler;
     }
 }
