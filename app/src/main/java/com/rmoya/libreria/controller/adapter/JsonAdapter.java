@@ -114,6 +114,9 @@ public class JsonAdapter extends RecyclerView.Adapter<JsonAdapter.ViewHolder> im
             txtTitulo = itemView.findViewById(R.id.txtTitulo);
             checkGuardar = itemView.findViewById(R.id.checkGuardar);
             txtAutor = itemView.findViewById(R.id.txtAutor);
+            txtlike = itemView.findViewById(R.id.txtLikes);
+            txtfav = itemView.findViewById(R.id.txtFavs);
+
 
             checkGuardar.setOnCheckedChangeListener((buttonView, isChecked) -> ListBooks.changeState(getAdapterPosition()));
 
