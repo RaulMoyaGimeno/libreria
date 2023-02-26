@@ -1,5 +1,6 @@
 package com.rmoya.libreria.model;
 
+import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -21,7 +22,7 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
-    public Book(){};
+    public Book(){}
 
     public String getBook_title() {
         return book_title;
@@ -79,6 +80,7 @@ public class Book implements Serializable {
         isSelected = !isSelected();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Book{" +

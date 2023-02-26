@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.TextView;
 
 import com.rmoya.libreria.R;
@@ -17,9 +15,7 @@ import com.rmoya.libreria.controller.adapter.BBDDAdapter;
 import com.rmoya.libreria.model.UserBook;
 import com.rmoya.libreria.util.TitleFilter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BBDDActivity extends AppCompatActivity {
 
