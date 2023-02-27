@@ -172,7 +172,7 @@ public class ShowBookActivity extends AppCompatActivity {
     }
 
     private int stateCheck(CheckBox check){
-        if(checkFavs.isChecked()){
+        if(check.isChecked()){
             return 1;
         }else{
             return 0;
